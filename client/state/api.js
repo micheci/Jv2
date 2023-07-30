@@ -1,24 +1,28 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
 
 export const api = createApi({
-    baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:9000'}),
+    baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:9000/openai/'}),
     reducerPath: "main",
     tagTypes: [],
     endpoints: (build) => ({
       postAiText: build.mutation({
         query: (payload) => ({
-          url: "openai/send",
+          url: "send",
           method: "POST",
           body: payload,
         }),
-      }),
-      
-   
+        
+      }),getAiText: build.query({
+          query: () => 'responses',
+          staleTime: 5000,
+          refetchOnMount: false, // Prevent initial refetch
+          refetchOnReconnect: false, // Prevent refetch on reconnect
+        }),
     }),
   });
   
   export const {
+    useGetAiTextQuery,
     usePostAiTextMutation,
-   
   } = api;

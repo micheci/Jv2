@@ -6,6 +6,7 @@ import helmet from "helmet";
 import morgan from "morgan";
 import { Configuration, OpenAIApi } from "openai";
 import openAiRoutes from './routes/openai.js'
+import connectDB from './config/database.js'
 
 
 /* CONFIGURATIONS */
@@ -19,6 +20,8 @@ app.use(bodyParser.json({ limit: "30mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 app.use(cors());
 
+//Connect To Database
+connectDB();
 /* OPEN AI CONFIGURATION */
 const configuration = new Configuration({
     apiKey: process.env.OPEN_API_KEY,
@@ -29,7 +32,7 @@ const configuration = new Configuration({
 app.use("/openai",openAiRoutes)
 
 /* SERVER SETUP */
-const PORT = process.env.PORT || 9000;
+const PORT = process.env.PORT || 8000;
 app.listen(PORT, () => {
   console.log(`Example app listening at http://localhost:${PORT}`);
 });
