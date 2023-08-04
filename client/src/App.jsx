@@ -1,6 +1,10 @@
-import { useState } from 'react'
-import {BrowserRouter,Routes,Route,Navigate} from 'react-router-dom'
-import Home from './pages/Home'
+import { useState } from 'react';
+import {BrowserRouter,Routes,Route,Navigate} from 'react-router-dom';
+import Home from './pages/Home';
+import 'babel-polyfill';
+import 'core-js/stable';
+import 'regenerator-runtime/runtime';
+
 
 
 

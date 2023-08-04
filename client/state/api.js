@@ -12,12 +12,19 @@ export const api = createApi({
           method: "POST",
           body: payload,
         }),
-        
-      }),getAiText: build.query({
+      }),
+      getAiText: build.query({
           query: () => 'responses',
           staleTime: 5000,
           refetchOnMount: false, // Prevent initial refetch
           refetchOnReconnect: false, // Prevent refetch on reconnect
+        }),
+        deleteAiText: build.mutation({
+          query: (id) => ({
+            url: `delete/${id}`, 
+            method: 'DELETE',
+          }),
+          
         }),
     }),
   });
@@ -25,4 +32,5 @@ export const api = createApi({
   export const {
     useGetAiTextQuery,
     usePostAiTextMutation,
+    useDeleteAiTextMutation
   } = api;

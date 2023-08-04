@@ -11,21 +11,38 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.5",
+    "@speechly/react-client": "^2.2.4",
+    "@speechly/speech-recognition-polyfill": "^1.3.0",
+    "babel-polyfill": "^6.26.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-redux": "^8.1.2",
     "react-router-dom": "^6.14.1",
+    "react-speech-recognition": "^3.10.0",
     "redux": "^4.2.1",
-    "typescript": "^5.1.6"
+    "typescript": "^5.1.6",
+    "vite": "^4.4.8"
   },
   "devDependencies": {
+    "@babel/core": "^7.22.9",
+    "@babel/plugin-transform-runtime": "^7.22.9",
+    "@babel/preset-env": "^7.22.9",
+    "@babel/preset-react": "^7.22.5",
     "@types/react": "^18.2.14",
     "@types/react-dom": "^18.2.6",
-    "@vitejs/plugin-react": "^4.0.1",
+    "@vitejs/plugin-react": "^4.0.4",
+    "core-js": "^3.32.0",
     "eslint": "^8.44.0",
     "eslint-plugin-react": "^7.32.2",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.1",
-    "vite": "^4.4.0"
-  }
+    "regenerator-runtime": "^0.13.11"
+  },
+  "browserslist": [
+    "last 2 versions",
+    "not dead",
+    "not < 0.2%",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
 }
