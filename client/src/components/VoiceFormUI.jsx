@@ -1,18 +1,33 @@
 import React, { useState, useEffect } from "react";
 import { usePostAiTextMutation } from "../../state/api";
 import { useGetAiTextQuery, useDeleteAiTextMutation } from "../../state/api.js";
-import VoiceText from "./VoiceText";
 
-const VoiceFormUI = () => {
+const VoiceFormUI = ({ transcript }) => {
   const [message, setMessage] = useState("");
   const [trigger] = usePostAiTextMutation();
   const [deleteResponseMutation] = useDeleteAiTextMutation();
-  //  const deleteResponseMutation = useDeleteAiTextMutation();
+  const [voices, setVoices] = useState([]);
+  const [latestResponseText, setLatestResponseText] = useState('');
 
   const { data, isLoading, isFetching, isError, error, refetch } = useGetAiTextQuery();
-  console.log(data);
-  
- 
+
+  useEffect(() => {
+    const synth = window.speechSynthesis;
+    synth.onvoiceschanged = () => {
+      const availableVoices = synth.getVoices();
+      setVoices(availableVoices);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (data) {
+      const lastResponse = data?.data[data?.data.length - 1];
+      if (lastResponse) {
+        setLatestResponseText(lastResponse.text);
+        speakText(lastResponse.text);
+      }
+    }
+  }, [data]);
 
   if (isLoading || isFetching) {
     return <div>loading...</div>;
@@ -23,35 +38,44 @@ const VoiceFormUI = () => {
     return <div>{error.status}</div>;
   }
 
-  //function that sets users message and saves it to state
   const handleChange = (e) => setMessage(e.target.value);
 
-  //function that handles submit and sends form to backend and also refreshes page
+  const speakText = (text, voice) => {
+    const synth = window.speechSynthesis;
+    const utterance = new SpeechSynthesisUtterance(text);
+
+    if (voice) {
+      utterance.voice = voice;
+    }
+
+    synth.speak(utterance);
+  };
+
   const handleSubmit = async () => {
-    console.log("test");
     const date = new Date()
       .toISOString()
       .replace("T", " ")
       .replace("Z", `${Math.floor(Math.random() * 1000)}+00:00`);
     const form = {
       created: date,
-      text: message,
+      text: transcript,
     };
 
-    console.log(form);
     await trigger(form);
-    if (data && data.data.length >= 5                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          ) {
-      // Get the ID of the oldest response
+
+    if (data && data.data.length >= 5) {
       const oldestResponseId = data.data[0]._id;
-      // Delete the oldest response
-      console.log(oldestResponseId);
-      console.log("got it")
-      await deleteResponseMutation(oldestResponseId)
-      // await deleteResponseMutation.mutateAsync(oldestResponseId);
+      await deleteResponseMutation(oldestResponseId);
     }
-  
-    
+
     await refetch({ force: true });
+
+    // Save the latest response text to the state variable
+    if (data && data.data.length > 0) {
+      const lastResponse = data?.data[data?.data.length - 1];
+      setLatestResponseText(lastResponse.text);
+    }
+
     setMessage("");
   };
 
@@ -60,16 +84,15 @@ const VoiceFormUI = () => {
   return (
     <>
       <div className="message-form">
-        <VoiceText/>
-        <p>Message</p>
         <input
           type="text"
-          value={message}
+          value={transcript}
           onChange={handleChange}
           placeholder="click the button and speak"
         />
         <button onClick={() => handleSubmit()}>Get response</button>
       </div>
+      <button onClick={() => speakText(latestResponseText)}>Speak Last Response</button>
       <ul>
         {dataArray.map((item, index) => (
           <li key={index}>
@@ -81,9 +104,6 @@ const VoiceFormUI = () => {
           </li>
         ))}
       </ul>
-      
-      
-
     </>
   );
 };

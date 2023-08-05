@@ -1,10 +1,8 @@
 // VoiceText.jsx
 import regeneratorRuntime from "regenerator-runtime";
-
-
-
 import React from 'react';
 import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
+import VoiceFormUI from "./VoiceFormUI";
 
 const VoiceText = () => {
   const {
@@ -24,7 +22,7 @@ const VoiceText = () => {
       <button onClick={SpeechRecognition.startListening}>Start</button>
       <button onClick={SpeechRecognition.stopListening}>Stop</button>
       <button onClick={resetTranscript}>Reset</button>
-      <p>{transcript}</p>
+      <VoiceFormUI transcript={transcript} />
     </div>
   );
 };
