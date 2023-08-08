@@ -1,13 +1,19 @@
 import React, { useState, useEffect } from "react";
-import { usePostAiTextMutation } from "../../state/api";
-import { useGetAiTextQuery, useDeleteAiTextMutation } from "../../state/api.js";
+import {
+  usePostAiTextMutation,
+  useGetAiTextQuery,
+  useDeleteAiTextMutation,
+} from "../../state/api";
 
 const VoiceFormUI = ({ transcript }) => {
   const [message, setMessage] = useState("");
+  const [selectedVoice, setSelectedVoice] = useState(null);
+  const [latestResponseText, setLatestResponseText] = useState("");
+  const [voices, setVoices] = useState([]);
+  const [isSpeaking, setIsSpeaking] = useState(false); // State variable for glowing effect
+
   const [trigger] = usePostAiTextMutation();
   const [deleteResponseMutation] = useDeleteAiTextMutation();
-  const [voices, setVoices] = useState([]);
-  const [latestResponseText, setLatestResponseText] = useState('');
 
   const { data, isLoading, isFetching, isError, error, refetch } = useGetAiTextQuery();
 
@@ -24,10 +30,15 @@ const VoiceFormUI = ({ transcript }) => {
       const lastResponse = data?.data[data?.data.length - 1];
       if (lastResponse) {
         setLatestResponseText(lastResponse.text);
-        speakText(lastResponse.text);
+        // Speak the latest response with the selected voice after 500ms delay
+        setTimeout(() => {
+          speakText(lastResponse.text, selectedVoice);
+        }, 500);
       }
+    } else {
+      setLatestResponseText(""); // Clear the latest response text when there is no data
     }
-  }, [data]);
+  }, [data, selectedVoice]);
 
   if (isLoading || isFetching) {
     return <div>loading...</div>;
@@ -35,12 +46,20 @@ const VoiceFormUI = ({ transcript }) => {
 
   if (isError) {
     console.log({ error });
-    return <div>{error.status}</div>;
+    return <div>This is an error</div>;
   }
 
   const handleChange = (e) => setMessage(e.target.value);
 
+  const handleVoiceSelect = (e) => {
+    const selectedVoiceName = e.target.value;
+    const selectedVoice = voices.find((voice) => voice.name === selectedVoiceName);
+    setSelectedVoice(selectedVoice);
+  };
+
   const speakText = (text, voice) => {
+    setIsSpeaking(true); // Set the glowing effect to true when speaking starts
+
     const synth = window.speechSynthesis;
     const utterance = new SpeechSynthesisUtterance(text);
 
@@ -49,6 +68,10 @@ const VoiceFormUI = ({ transcript }) => {
     }
 
     synth.speak(utterance);
+
+    utterance.onend = () => {
+      setIsSpeaking(false); // Reset the glowing effect when speaking ends
+    };
   };
 
   const handleSubmit = async () => {
@@ -78,12 +101,13 @@ const VoiceFormUI = ({ transcript }) => {
 
     setMessage("");
   };
-
   const dataArray = data?.data;
+
 
   return (
     <>
-      <div className="message-form">
+      <div className="container">
+        <div className="text-area1">
         <input
           type="text"
           value={transcript}
@@ -91,8 +115,29 @@ const VoiceFormUI = ({ transcript }) => {
           placeholder="click the button and speak"
         />
         <button onClick={() => handleSubmit()}>Get response</button>
+        </div>
+      
+        <div className="text-area2">
+        <select value={selectedVoice?.name} onChange={handleVoiceSelect}>
+          {voices.map((voice) => (
+            <option key={voice.name} value={voice.name}>
+              {voice.name}
+            </option>
+          ))}
+        </select>
+     </div></div>
+
+        <div className="message-form">
+        <div className={`circle ${isSpeaking ? "glowing" : ""}`}>
+          <div className="circle-text">Jarvis</div>
+        </div>
       </div>
-      <button onClick={() => speakText(latestResponseText)}>Speak Last Response</button>
+
+     
+
+      <button onClick={() => speakText(latestResponseText, selectedVoice)}>
+        Speak Last Response
+      </button>
       <ul>
         {dataArray.map((item, index) => (
           <li key={index}>
@@ -104,6 +149,7 @@ const VoiceFormUI = ({ transcript }) => {
           </li>
         ))}
       </ul>
+      <canvas id="visualizer" width="800" height="200"></canvas>
     </>
   );
 };
