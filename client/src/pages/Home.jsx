@@ -5,9 +5,10 @@ import VoiceText from '../components/VoiceText'
 const Home = () => {
   return (
     // Home page
-    <div>
-        <h1>Talk/click top button to ask question</h1>
-      
+    <div className='jarvis'>
+      <div className="center-text">
+        <h1>Hi! Im M.A.R.V.I.S</h1>
+      </div>
         <VoiceText/>
     </div>
 

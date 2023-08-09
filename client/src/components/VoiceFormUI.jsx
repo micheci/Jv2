@@ -116,7 +116,7 @@ const VoiceFormUI = ({ transcript }) => {
         />
         <button onClick={() => handleSubmit()}>Get response</button>
         </div>
-      
+      <br />
         <div className="text-area2">
         <select value={selectedVoice?.name} onChange={handleVoiceSelect}>
           {voices.map((voice) => (
@@ -125,7 +125,9 @@ const VoiceFormUI = ({ transcript }) => {
             </option>
           ))}
         </select>
-     </div></div>
+     </div>
+     <br />
+     </div>
 
         <div className="message-form">
         <div className={`circle ${isSpeaking ? "glowing" : ""}`}>
@@ -138,9 +140,11 @@ const VoiceFormUI = ({ transcript }) => {
       <button onClick={() => speakText(latestResponseText, selectedVoice)}>
         Speak Last Response
       </button>
-      <ul>
+
+      <div className="list-container">
+        <ul className="list"> 
         {dataArray.map((item, index) => (
-          <li key={index}>
+          <li className='list-item' key={index}>
             <strong>Text: </strong>
             {item.text || "N/A"}
             <br />
@@ -148,8 +152,11 @@ const VoiceFormUI = ({ transcript }) => {
             {item.createdAt || "N/A"}
           </li>
         ))}
-      </ul>
-      <canvas id="visualizer" width="800" height="200"></canvas>
+        </ul>
+      </div>
+
+      {/* <canvas id="visualizer" width="800" height="200"></canvas> */}
+    
     </>
   );
 };

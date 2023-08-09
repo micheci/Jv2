@@ -17,11 +17,14 @@ const VoiceText = () => {
   }
 
   return (
-    <div>
+    <div className="microphone">
+      <div className="div">
       <p>Microphone: {listening ? 'on' : 'off'}</p>
-      <button onClick={SpeechRecognition.startListening}>Start</button>
-      <button onClick={SpeechRecognition.stopListening}>Stop</button>
-      <button onClick={resetTranscript}>Reset</button>
+      <button className='robotic-button' onClick={SpeechRecognition.startListening}>Start</button>
+      <button className='end-button' onClick={SpeechRecognition.stopListening}>Stop</button>
+      <button className='clear-button' onClick={resetTranscript}>Reset</button>
+      </div>
+      <br />
       <VoiceFormUI transcript={transcript} />
     </div>
   );

@@ -1,5 +1,9 @@
 /* styles.css */
 
+/* .container{
+    display:flex;
+    flex-direction:row;
+} */
 .message-form {
     display: flex;
     flex-direction: column;
@@ -54,12 +58,139 @@
       box-shadow: 0 0 10px #007bff, 0 0 20px #007bff, 0 0 40px #007bff;
     }
   }
-  
-  .text-area1{
-    display: flex;
-    flex-direction: horizontally;
-    align-items: center;
-    justify-content: center
+ 
 
+  .container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
   }
   
+  .text-area1,
+  .text-area2 {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .text-area1 input,
+  .text-area1 button {
+    flex: 1;
+    max-width: 200px;
+    margin-right: 10px;
+  }
+  
+  .text-area2 select {
+    max-width: 200px;
+    margin-left: 10px;
+    flex: 1; /* Add this line to make the select element take remaining space */
+  }
+  
+  /* Optional: Adjust font size for smaller screens */
+  @media (max-width: 600px) {
+    .text-area1 input,
+    .text-area1 button,
+    .text-area2 select {
+      font-size: 14px;
+    }
+  }
+/* ------------------------------ */
+  
+  .microphone{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+  }
+
+  .robotic-button {
+    display: inline-block;
+    padding: 8px 16px;
+    font-size: 14px;
+    font-weight: bold;
+    color: white;
+    background-color: #007bff; /* Blue color */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+  .robotic-button:hover {
+    background-color: #0056b3; /* Darker blue color on hover */
+    transform: scale(1.05); /* Slightly scale up on hover */
+  }
+  .robotic-button:focus {
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+  }
+  .end-button {
+    display: inline-block;
+    padding: 8px 16px;
+    font-size: 14px;
+    font-weight: bold;
+    color: white;
+    background-color: red; /* Blue color */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+
+  .clear-button {
+    display: inline-block;
+    padding: 6px 14px;
+    font-size: 14px;
+    font-weight: bold;
+    color: black;
+    background-color: white; /* Blue color */
+    border: 1px solid black;
+    border-radius: 5px;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+
+*{
+    margin:0;
+    padding:0;
+}
+.center-text{
+    display:flex;
+    justify-content:center;
+}
+/* ----------------------- */
+.list-container {
+    border: 2px solid #333; /* Border style and color */
+    padding: 10px; /* Add padding for spacing */
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center;
+    overflow-x: auto; /* Allow horizontal scrolling on smaller screens */
+  }
+  .list {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column; /* Display list items vertically */
+    align-items: center;
+  }
+  .list-item {
+    padding: 10px;
+    border-bottom: 1px solid #ccc; /* Add a border between list items */
+    width: 100%; /* Ensure list items take full width */
+    box-sizing: border-box;
+    text-align: center;
+  }
+  
+  /* Add media query for responsiveness */
+  @media screen and (max-width: 768px) {
+    .list-container {
+      overflow-x: hidden; /* Disable horizontal scrolling on smaller screens */
+    }
+  }
