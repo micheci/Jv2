@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import Graph from "./Graph";
 import {
   usePostAiTextMutation,
   useGetAiTextQuery,
@@ -133,6 +134,7 @@ const VoiceFormUI = ({ transcript }) => {
         <div className={`circle ${isSpeaking ? "glowing" : ""}`}>
           <div className="circle-text">Jarvis</div>
         </div>
+        <Graph/>
       </div>
 
      
