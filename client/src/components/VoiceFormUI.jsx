@@ -129,13 +129,30 @@ const VoiceFormUI = ({ transcript }) => {
      </div>
      <br />
      </div>
-
+{/* 
         <div className="message-form">
         <div className={`circle ${isSpeaking ? "glowing" : ""}`}>
           <div className="circle-text">Jarvis</div>
         </div>
         <Graph/>
-      </div>
+      </div> */}
+      <div className="reactor-container">
+    <div className="reactor-container-inner circle abs-center"></div>
+    <div className="tunnel circle abs-center"></div>
+    <div className="core-wrapper circle abs-center"></div>
+    <div className="core-outer circle abs-center"></div>
+    <div className="core-inner circle abs-center"></div>
+    <div className="coil-container">
+      <div className="coil coil-1"></div>
+      <div className="coil coil-2"></div>
+      <div className="coil coil-3"></div>
+      <div className="coil coil-4"></div>
+      <div className="coil coil-5"></div>
+      <div className="coil coil-6"></div>
+      <div className="coil coil-7"></div>
+      <div className="coil coil-8"></div>
+    </div>
+  </div>
 
      
 
