@@ -5,6 +5,7 @@ import {
   useGetAiTextQuery,
   useDeleteAiTextMutation,
 } from "../../state/api";
+import Rader from "./Rader";
 
 const VoiceFormUI = ({ transcript }) => {
   const [message, setMessage] = useState("");
@@ -130,12 +131,13 @@ const VoiceFormUI = ({ transcript }) => {
      <br />
      </div>
 {/* 
-        <div className="message-form">
+        
         <div className={`circle ${isSpeaking ? "glowing" : ""}`}>
           <div className="circle-text">Jarvis</div>
-        </div>
-        <Graph/>
-      </div> */}
+        
+        
+      </div> */}<div className="message-form">
+      <Graph/>
       <div className="reactor-container">
     <div className="reactor-container-inner circle abs-center"></div>
     <div className="tunnel circle abs-center"></div>
@@ -153,7 +155,8 @@ const VoiceFormUI = ({ transcript }) => {
       <div className="coil coil-8"></div>
     </div>
   </div>
-
+  <Rader/>
+</div>
      
 
       <button onClick={() => speakText(latestResponseText, selectedVoice)}>
