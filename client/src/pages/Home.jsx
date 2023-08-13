@@ -13,17 +13,17 @@ const Home = () => {
   return (
     // Home page
     <div className="wrapper">
-  <div className="one"><Clock/></div>
-  <div className="two"><Rader/></div>
-  <div className="three">Marvis</div>
-  <div className="four"><Arc/></div>
-  <div className="five"><Graph/></div>
-  <div className="six">Six</div>
-  <div className="seven"> <Helmet/></div>
-  <div className="eight">Eight</div>
-  <div className="nine">Nine</div>
-  <div className="ten">Ten</div>
-</div>
+      <div className="one"><Clock/></div>
+      <div className="two"><Rader/></div>
+      <div className="three">M.A.R.V.I.S</div>
+      <div className="four"><Arc/></div>
+      <div className="five"><Graph/></div>
+      <div className="six">Six</div>
+      <div className="seven"> <Helmet/></div>
+      <div className="eight">Eight</div>
+      <div className="nine">Nine</div>
+      <div className="ten">Ten</div>
+    </div>
 
     // <div className='jarvis'>
     //   <div className="center-text"> 
