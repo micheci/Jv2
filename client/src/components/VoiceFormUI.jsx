@@ -130,17 +130,7 @@ const VoiceFormUI = ({ transcript }) => {
      </div>
      <br />
      </div>
-{/* 
-        
-        <div className={`circle ${isSpeaking ? "glowing" : ""}`}>
-          <div className="circle-text">Jarvis</div>
-        
-        
-      </div> */}<div className="message-form">
-      <Graph/>
-  
-  
-</div>
+
      
 
       <button onClick={() => speakText(latestResponseText, selectedVoice)}>

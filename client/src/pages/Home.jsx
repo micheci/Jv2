@@ -15,14 +15,13 @@ const Home = () => {
     <div className="wrapper">
       <div className="one"><Clock/></div>
       <div className="two"><Rader/></div>
-      <div className="three">M.A.R.V.I.S</div>
+      <div className="three ">M.A.R.V.I.S</div>
       <div className="four"><Arc/></div>
       <div className="five"><Graph/></div>
-      <div className="six">Six</div>
+      
       <div className="seven"> <Helmet/></div>
-      <div className="eight">Eight</div>
-      <div className="nine">Nine</div>
-      <div className="ten">Ten</div>
+      <div className="eight text-align-center"><VoiceText/></div>
+     
     </div>
 
     // <div className='jarvis'>
